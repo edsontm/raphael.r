@@ -183,6 +183,26 @@ O script de teste do classificador registra acur\'acia de 76,66\% nas 497 imagen
 
 A distribui\c{c}\~ao de classes da matriz (215 e 282 imagens) coincide com a do teste do diret\'orio dataset, constru\'ido com limiar de 0,97. Os pesos preservados permitiriam reexecutar essa avalia\c{c}\~ao.
 
+As medidas por classe derivadas da matriz est\~ao na Tabela~\ref{tab:classificador-por-classe}. Como as classes s\~ao desbalanceadas, a acur\'acia global deve ser lida contra a linha de base do classificador trivial que atribui a classe majorit\'aria a todas as imagens, que acertaria 282 das 497 imagens, ou 56,74\%. A acur\'acia obtida, de 76,66\%, situa-se acima dessa linha de base, mas o classificador erra cerca de um quarto das imagens em ambas as classes.
+
+\begin{table}[htb]
+\centering
+\caption{Medidas por classe do classificador auxiliar, derivadas da matriz de confus\~ao}
+\label{tab:classificador-por-classe}
+\small
+\begin{tabular}{lcccc}
+\hline
+\textbf{Classe} & \textbf{Suporte} & \textbf{Precis\~ao} & \textbf{Recall} & \textbf{F1} \\
+\hline
+Classe 0 (F1 do detector $<$ 0,97) & 215 & 0,711 & 0,777 & 0,742 \\
+Classe 1 (F1 do detector $\geq$ 0,97) & 282 & 0,817 & 0,759 & 0,787 \\
+\hline
+\multicolumn{2}{l}{Acur\'acia global} & \multicolumn{3}{c}{0,7666 (381 de 497)} \\
+\multicolumn{2}{l}{Linha de base da classe majorit\'aria} & \multicolumn{3}{c}{0,5674 (282 de 497)} \\
+\hline
+\end{tabular}
+\end{table}
+
 Pelas raz\~oes descritas na Se\c{c}\~ao~\ref{sec:dependencia-subconjuntos-classificador}, ``Depend\^encia entre os subconjuntos do classificador'', esse valor n\~ao estima o desempenho em imagens de origem novas, e o limiar de 0,97 usado para construir os r\'otulos n\~ao \'e uma medida de desempenho do classificador nem um ponto de corte validado para selecionar imagens de treinamento.
 
 \section{Associa\c{c}\~ao de identidades entre imagens}
@@ -190,7 +210,7 @@ Pelas raz\~oes descritas na Se\c{c}\~ao~\ref{sec:dependencia-subconjuntos-classi
 
 O procedimento de numera\c{c}\~ao foi aplicado ao campo P11, com uma refer\^encia de 217 objetos identificados e 23 arquivos-alvo. H\'a 24 arquivos de sa\'ida porque um deles \'e a c\'opia da pr\'opria refer\^encia.
 
-No conjunto dos 23 alvos processados, foram contadas 5.168 linhas de objetos, das quais 4.691 receberam identificador diferente de -1 e 477 permaneceram com esse valor sentinela, o que corresponde a 90,77\% de atribui\c{c}\~ao.
+No conjunto dos 23 alvos processados, foram contadas 5.168 linhas de objetos, das quais 4.691 receberam identificador diferente de -1 e 477 permaneceram com esse valor sentinela, o que corresponde a 90,77\% de atribui\c{c}\~ao. A Tabela~\ref{tab:distribuicao-atribuicoes} apresenta a distribui\c{c}\~ao dessas atribui\c{c}\~oes entre os arquivos-alvo.
 
 \begin{table}[htb]
 \centering
