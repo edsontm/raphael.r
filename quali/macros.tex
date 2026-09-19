@@ -1,0 +1,11 @@
+% Este documento (qualificacao) nao reaproveita nenhuma das macros
+% definidas no macros.tex do modelo (elas eram especificas da tese de
+% Edson Takashi Matsubara: \lexrank, \progroc, \cotraining etc.).
+%
+% Uma unica macro auxiliar e definida abaixo: o modelo (tese.pdf) nao
+% contem nenhuma figura, logo nao define nenhum padrao de "Fonte:"
+% sob as imagens. Como todas as 14 figuras do documento original
+% trazem essa linha (ex.: "Fonte: Elaborado pelo autor (2026)."),
+% \fonte reproduz esse conteudo de forma consistente, fora do texto
+% do \caption (para nao poluir a Lista de Figuras).
+\newcommand{\fonte}[1]{{\centering\footnotesize Fonte: #1\par}}

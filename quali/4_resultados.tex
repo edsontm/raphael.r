@@ -1,0 +1,242 @@
+\chapter{Resultados e Discuss\~ao}
+\label{cap:resultados}
+
+\section{Avalia\c{c}\~ao comparativa dos detectores}
+\label{sec:avaliacao-comparativa}
+
+Na avalia\c{c}\~ao comparativa, 15 \textit{checkpoints} treinados foram aplicados ao mesmo teste de 27 imagens, com os mesmos par\^ametros de infer\^encia por imagem e o mesmo limiar de correspond\^encia. Um d\'ecimo sexto relat\'orio avaliou, nas mesmas condi\c{c}\~oes, o modelo-base sem ajuste ao dom\'inio, como controle (Tabelas~\ref{tab:medidas-ponto-operacional} e~\ref{tab:metricas-biblioteca}).
+
+O modelo-base produziu duas predi\c{c}\~oes em todo o conjunto e nenhum verdadeiro positivo; seus 7.852 falsos negativos correspondem ao total de parcelas do teste. Todos os checkpoints ajustados produziram verdadeiros positivos.
+
+\begin{table}[htb]
+\centering
+\caption{Medidas no ponto operacional}
+\label{tab:medidas-ponto-operacional}
+\scriptsize
+\begin{tabular}{lcccccccc}
+\hline
+\textbf{Checkpoint} & \textbf{Repr.} & \textbf{TP} & \textbf{FP} & \textbf{FN} & \textbf{Prec. global} & \textbf{Recall global} & \textbf{F1 global} & \textbf{F1 m\'edio/img.} \\
+\hline
+251003\_2354 & seg & 3.660 & 1.996 & 4.192 & 0,647 & 0,466 & 0,542 & 0,621 \\
+251004\_2132 & seg & 3.618 & 450 & 4.234 & 0,889 & 0,461 & 0,607 & 0,733 \\
+251022\_1208 & seg & 3.661 & 1.649 & 4.191 & 0,689 & 0,466 & 0,556 & 0,580 \\
+260318\_2058 & seg & 3.891 & 861 & 3.961 & 0,819 & 0,496 & 0,617 & 0,657 \\
+260320\_0320 & seg & 3.675 & 585 & 4.177 & 0,863 & 0,468 & 0,607 & 0,652 \\
+260323\_1718 & seg & 3.941 & 852 & 3.911 & 0,822 & 0,502 & 0,623 & 0,659 \\
+260404\_1213 & seg & 6.542 & 1.080 & 1.310 & 0,858 & 0,833 & 0,846 & 0,715 \\
+260406\_0036 & seg & 6.341 & 567 & 1.511 & 0,918 & 0,808 & 0,859 & 0,881 \\
+260408\_1721 & HBB & 6.856 & 687 & 996 & 0,909 & 0,873 & 0,891 & 0,912 \\
+260512\_1741 & HBB & 4.147 & 97 & 3.705 & \textbf{0,977} & 0,528 & 0,686 & 0,870 \\
+260519\_0108 & HBB & 6.024 & 315 & 1.828 & 0,950 & 0,767 & 0,849 & 0,893 \\
+260520\_0626 & HBB & 6.158 & 236 & 1.694 & 0,963 & 0,784 & 0,865 & 0,894 \\
+\textbf{260525\_2231} & \textbf{OBB} & \textbf{7.301} & 370 & \textbf{551} & 0,952 & \textbf{0,930} & \textbf{0,941} & \textbf{0,935} \\
+260528\_0037 & OBB & 4.106 & 197 & 3.746 & 0,954 & 0,523 & 0,676 & 0,865 \\
+260530\_1336 & OBB & 4.284 & 316 & 3.568 & 0,931 & 0,546 & 0,688 & 0,878 \\
+\textit{Modelo-base (controle)} & OBB & 0 & 2 & 7.852 & 0,000 & 0,000 & 0,000 & 0,000 \\
+\hline
+\end{tabular}
+
+\vspace{0.3cm}
+\footnotesize \textit{Nota: confian\c{c}a m\'inima de 0,3 e limiar de correspond\^encia de 0,5. Representa\c{c}\~ao: seg, segmenta\c{c}\~ao; HBB, caixas horizontais; OBB, caixas orientadas. A coluna indica a tarefa do modelo, e n\~ao necessariamente a geometria usada em cada m\'etrica.}
+\end{table}
+
+\begin{table}[htb]
+\centering
+\caption{M\'etricas da biblioteca e agrega\c{c}\~oes da sobreposi\c{c}\~ao}
+\label{tab:metricas-biblioteca}
+\small
+\begin{tabular}{lcccc}
+\hline
+\textbf{Checkpoint} & \textbf{mAP@0,5} & \textbf{mAP@0,5:0,95} & \textbf{IoU pond. correspond.} & \textbf{IoU m\'edio/imagem} \\
+\hline
+251003\_2354 & 0,488 & 0,274 & 0,696 & 0,694 \\
+251004\_2132 & 0,480 & 0,240 & 0,715 & 0,659 \\
+251022\_1208 & 0,476 & 0,305 & 0,726 & 0,645 \\
+260318\_2058 & 0,537 & 0,271 & 0,720 & 0,706 \\
+260320\_0320 & 0,511 & 0,289 & 0,743 & 0,712 \\
+260323\_1718 & 0,551 & 0,324 & 0,752 & 0,719 \\
+260404\_1213 & 0,606 & 0,344 & 0,762 & 0,756 \\
+260406\_0036 & 0,661 & 0,386 & 0,783 & 0,801 \\
+260408\_1721 & 0,660 & 0,435 & 0,784 & 0,801 \\
+260512\_1741 & 0,617 & 0,416 & \textbf{0,819} & 0,746 \\
+260519\_0108 & 0,636 & 0,394 & 0,785 & 0,788 \\
+260520\_0626 & 0,676 & 0,429 & 0,777 & 0,794 \\
+260525\_2231 & 0,734 & 0,621 & 0,796 & 0,810 \\
+260528\_0037 & 0,725 & 0,599 & 0,816 & 0,749 \\
+260530\_1336 & \textbf{0,738} & \textbf{0,628} & 0,814 & 0,768 \\
+\hline
+\end{tabular}
+
+\vspace{0.3cm}
+\footnotesize \textit{Nota: os valores de mAP prov\^em da chamada separada de valida\c{c}\~ao da biblioteca. Os par\^ametros efetivos dessa passagem n\~ao podem ser deduzidos apenas do cabe\c{c}alho da avalia\c{c}\~ao adicional por imagem, conforme descrito na Metodologia.}
+\end{table}
+
+As duas agrega\c{c}\~oes da sobreposi\c{c}\~ao ordenam os modelos de modo diferente em v\'arios casos. O checkpoint 260512\_1741, por exemplo, tem o maior IoU ponderado por correspond\^encias da bateria (0,819) e recall de 0,528: a qualidade m\'edia dos pares aceitos n\~ao compensa a baixa propor\c{c}\~ao de refer\^encias recuperadas.
+
+Os checkpoints de caixas orientadas t\^em os maiores valores de mAP@0,5:0,95, de 0,599 a 0,628, contra no m\'aximo 0,435 entre os de caixas horizontais e 0,386 entre os de segmenta\c{c}\~ao. Como essa m\'etrica agrega limiares de sobreposi\c{c}\~ao cada vez mais estritos, \'e sens\'ivel ao alinhamento geom\'etrico entre predi\c{c}\~ao e refer\^encia, o que \'e coerente com a motiva\c{c}\~ao para usar caixas orientadas. Os checkpoints comparados, por\'em, diferem tamb\'em em data de treinamento, configura\c{c}\~ao e dados, e a diferen\c{c}a n\~ao pode ser atribu\'ida apenas \`a orienta\c{c}\~ao das caixas.
+
+O recall varia muito dentro de uma mesma representa\c{c}\~ao. Entre os tr\^es checkpoints de caixas orientadas, vai de 0,523 a 0,930, com precis\~ao entre 0,931 e 0,954; entre os de caixas horizontais, de 0,528 a 0,873. Os dados n\~ao permitem identificar a origem dessas diferen\c{c}as nem estimar a variabilidade entre execu\c{c}\~oes repetidas de uma mesma configura\c{c}\~ao.
+
+O desempenho tamb\'em variou entre imagens. No \textit{checkpoint} com maior F1 global, uma imagem com 23 refer\^encias teve 14 predi\c{c}\~oes e tr\^es correspond\^encias aceitas (F1 de 0,1622).
+
+Os \textit{checkpoints} 260525\_2231 e 260530\_1336 mostram como a ordena\c{c}\~ao depende da medida. O segundo tem valores ligeiramente maiores nas m\'etricas da biblioteca: mAP@0,5 de 0,738 contra 0,734 e mAP@0,5:0,95 de 0,628 contra 0,621. No ponto operacional, a rela\c{c}\~ao se inverte: o primeiro tem recall de 0,930 e F1 global de 0,941, contra 0,546 e 0,688 do segundo, com 3.017 verdadeiros positivos a mais.
+
+Na imagem mais densa do teste, com 2.329 refer\^encias, 260525\_2231 produziu 2.234 predi\c{c}\~oes e 2.109 correspond\^encias aceitas; 260530\_1336 produziu 151 predi\c{c}\~oes e nenhuma correspond\^encia aceita.
+
+Separando as imagens por origem, a diferen\c{c}a entre os dois \textit{checkpoints} est\'a nas imagens de drone. Nas 15 imagens orbitais (1.185 parcelas), o F1 global \'e de 0,949 para 260525\_2231 e de 0,953 para 260530\_1336. Nas 12 imagens de drone (6.667 parcelas), \'e de 0,939 e 0,625, com recall de 0,924 e 0,472. Os dois \textit{checkpoints} de caixas orientadas com recall baixo foram treinados com entrada de 1.280 \textit{pixels} e avaliados com 1.024, enquanto 260525\_2231 foi treinado e avaliado com 1.024. Essa diferen\c{c}a de escala \'e uma explica\c{c}\~ao poss\'ivel, ainda n\~ao testada; o \textit{checkpoint} 260512\_1741, treinado e avaliado com 1.024 pixels, tamb\'em tem recall baixo (0,528).
+
+As medidas n\~ao se contradizem: as m\'etricas da biblioteca integram o comportamento do detector ao longo de v\'arios limiares de confian\c{c}a, enquanto precis\~ao, recall e F1 descrevem um \'unico ponto de opera\c{c}\~ao. As duas passagens de avalia\c{c}\~ao tamb\'em diferem em par\^ametros, e a diferen\c{c}a n\~ao pode ser atribu\'ida apenas ao limiar de confian\c{c}a.
+
+A express\~ao ``melhor modelo'' depende, portanto, da medida: no ponto operacional desta bateria, 260525\_2231 tem o maior F1 global; nas m\'etricas da biblioteca, 260530\_1336 tem valores marginalmente maiores.
+
+As duas execu\c{c}\~oes tamb\'em diferem na dimens\~ao de entrada do treinamento (1.024 e 1.280 \textit{pixels}) e no descritor de dados registrado.
+
+O \textit{checkpoint} 260525\_2231 foi definido como modelo de infer\^encia do sistema em 27 de maio de 2026, dois dias ap\'os seu treinamento, antes de o \textit{checkpoint} 260530\_1336 existir e antes da avalia\c{c}\~ao comparativa, realizada em agosto. O F1 obtido nessa avalia\c{c}\~ao n\~ao foi, portanto, o crit\'erio da escolha, embora seja compat\'ivel com ela. A indica\c{c}\~ao na configura\c{c}\~ao n\~ao constitui implanta\c{c}\~ao em ambiente de produ\c{c}\~ao.
+
+O YOLO26m de agosto de 2026 foi avaliado \`a parte no mesmo teste, com dimens\~ao de entrada de 1.280 pixels, confian\c{c}a m\'inima de 0,3 e uma vers\~ao posterior do script. Obteve precis\~ao global de 0,914, recall de 0,550, F1 global de 0,687, mAP@0,5 de 0,708 e mAP@0,5:0,95 de 0,583. O F1 foi de 0,898 nas imagens orbitais e de 0,637 nas de drone, e o recall caiu de 0,988 na faixa de 101 a 500 refer\^encias para 0,498 na faixa de 501 a 2.000 e 0,092 na imagem com mais de 2.000 refer\^encias. Esse modelo foi treinado com recortes que, em geral, t\^em at\'e 500 objetos e avaliado em imagens inteiras; essa diferen\c{c}a \'e uma explica\c{c}\~ao poss\'ivel para a queda nas imagens densas, ainda n\~ao testada. Por usar outra dimens\~ao de entrada e outra vers\~ao do script, seu resultado n\~ao \'e incorporado \`as Tabelas~\ref{tab:medidas-ponto-operacional} e~\ref{tab:metricas-biblioteca}.
+
+\section{Desempenho por quantidade de parcelas por imagem}
+\label{sec:desempenho-quantidade-parcelas}
+
+O relat\'orio do checkpoint 260525\_2231 estratifica os resultados pela quantidade de refer\^encias por imagem (Tabela~\ref{tab:desempenho-faixa}).
+
+\begin{table}[htb]
+\centering
+\caption{Desempenho por faixa (260525\_2231)}
+\label{tab:desempenho-faixa}
+\small
+\begin{tabular}{lcccccccc}
+\hline
+\textbf{Faixa de refer\^encias} & \textbf{Imagens} & \textbf{TP} & \textbf{FP} & \textbf{FN} & \textbf{Precis\~ao} & \textbf{Recall} & \textbf{F1} & \textbf{IoU m\'edio/img.} \\
+\hline
+11--30 & 6 & 143 & 16 & 21 & 0,899 & 0,872 & 0,885 & 0,818 \\
+31--50 & 4 & 149 & 11 & 2 & 0,931 & 0,987 & 0,958 & 0,773 \\
+51--100 & 3 & 191 & 30 & 4 & 0,864 & 0,979 & 0,918 & 0,840 \\
+101--500 & 10 & 2.383 & 43 & 25 & 0,982 & 0,990 & 0,986 & 0,810 \\
+501--2000 & 3 & 2.326 & 145 & 279 & 0,941 & 0,893 & 0,916 & 0,832 \\
+$\geq$ 2001 & 1 & 2.109 & 125 & 220 & 0,944 & 0,906 & 0,924 & 0,754 \\
+\hline
+\end{tabular}
+\end{table}
+
+A faixa de 101 a 500 refer\^encias tem o maior F1 (0,986) e \'e a mais representada, com 10 das 27 imagens, mas n\~ao o maior IoU m\'edio. Ela coincide com o intervalo visado pela subdivis\~ao de imagens densas; estabelecer rela\c{c}\~ao causal exigiria comparar treinamentos com e sem subdivis\~ao.
+
+A faixa com 2.001 ou mais refer\^encias tem uma \'unica imagem, e seus valores descrevem esse caso.
+
+\section{Resultados hist\'oricos de acompanhamento dos treinamentos}
+\label{sec:resultados-historicos-acompanhamento}
+
+Os checkpoints guardam os hist\'oricos de valida\c{c}\~ao de cada treinamento, calculados pela biblioteca sobre o conjunto de valida\c{c}\~ao da pr\'opria execu\c{c}\~ao (Tabela~\ref{tab:historico-interno}).
+
+\begin{table}[htb]
+\centering
+\caption{Hist\'orico interno dos experimentos apresentados na Metodologia}
+\label{tab:historico-interno}
+\small
+\begin{tabular}{lp{3.2cm}ccc}
+\hline
+\textbf{Experimento} & \textbf{Campo do hist\'orico} & \textbf{M\'aximo registrado} & \textbf{\'Epoca do m\'aximo} & \textbf{Extens\~ao do hist\'orico} \\
+\hline
+EXP-002 & metrics/mAP50(M) & 0,96524 & 52 (1\textsuperscript{a} ocorr\^encia; empate com 53) & 100 \\
+EXP-003 & metrics/mAP50(M) & 0,93120 & 63 & 100 \\
+EXP-006 & metrics/mAP50(M) & 0,88442 & 68 & 120 \\
+EXP-009 & metrics/mAP50(B) & 0,78949 & 58 & 120 \\
+EXP-013 & metrics/mAP50(B) & 0,96410 & 95 & 120 \\
+EXP-016 & metrics/mAP50(B) & 0,96253 & 90 & 120 \\
+\hline
+\end{tabular}
+\end{table}
+
+Esses valores n\~ao equivalem aos das Tabelas~\ref{tab:medidas-ponto-operacional} e~\ref{tab:metricas-biblioteca}: correspondem \`a valida\c{c}\~ao de cada execu\c{c}\~ao, com conjuntos, procedimentos e, em parte dos casos, representa\c{c}\~oes geom\'etricas diferentes, e a diferen\c{c}a entre eles n\~ao indica, sozinha, queda de desempenho. O EXP-016, por exemplo, atingiu mAP@0,5 de 0,96253 na valida\c{c}\~ao, composta por recortes do conjunto subdividido, e 0,708 no teste comum, composto por imagens inteiras.
+
+Uma avalia\c{c}\~ao anterior, de abril de 2026, associada ao EXP-009, com confian\c{c}a m\'inima de 0,4 e dimens\~ao de entrada de 1.280 pixels, registrou F1 de 89,29\%.
+
+\section{Linhas experimentais paralelas}
+\label{sec:linhas-paralelas}
+
+Os valores desta linha s\~ao de valida\c{c}\~ao interna, calculados a cada \'epoca em cada treinamento. Como os conjuntos de valida\c{c}\~ao variam entre treinamentos e a abordagem n\~ao foi avaliada no teste comum dos detectores, eles n\~ao s\~ao compar\'aveis aos resultados YOLO. O maior F1 de valida\c{c}\~ao, 0,685 (precis\~ao de 0,703 e recall de 0,669), foi obtido com redu\c{c}\~ao de resolu\c{c}\~ao de quatro vezes, 297 imagens de treinamento e 55 de valida\c{c}\~ao. Com redu\c{c}\~ao de oito vezes, extrator simplificado, 2.346 imagens de treinamento e 255 de valida\c{c}\~ao, os maiores F1 ficaram entre 0,454 e 0,475. Com a VGG19 pr\'e-treinada, 1.377 imagens de treinamento e 255 de valida\c{c}\~ao, o maior F1 foi 0,142, com precis\~ao de 0,538 e recall de 0,082.
+
+Duas execu\c{c}\~oes de 12 \'epocas registraram valida\c{c}\~ao ao fim de cada \'epoca. Na de fevereiro de 2026, o mAP@0,5 de valida\c{c}\~ao atingiu 0,730 na quinta \'epoca; na de mar\c{c}o, com o conjunto de 134 imagens e 9 imagens de valida\c{c}\~ao, atingiu 0,489. Em nenhuma das duas o valor cresceu de forma cont\'inua ao longo das \'epocas. Como as execu\c{c}\~oes usaram diret\'orios de dados diferentes, os valores n\~ao s\~ao compar\'aveis entre si nem com os detectores YOLO, e a linha n\~ao foi avaliada em conjunto de teste.
+
+\section{Classificador auxiliar de dificuldade}
+\label{sec:resultado-classificador-auxiliar}
+
+O script de teste do classificador registra acur\'acia de 76,66\% nas 497 imagens do subconjunto de teste (Tabela~\ref{tab:matriz-confusao}).
+
+\begin{table}[htb]
+\centering
+\caption{Matriz de confus\~ao registrada (classes verdadeiras em linhas, previstas em colunas)}
+\label{tab:matriz-confusao}
+\begin{tabular}{lccc}
+\hline
+\textbf{Classe verdadeira} & \textbf{Prevista: classe 0} & \textbf{Prevista: classe 1} & \textbf{Total} \\
+\hline
+\textbf{Verdadeira: classe 0} & 167 & 48 & 215 \\
+\textbf{Verdadeira: classe 1} & 68 & 214 & 282 \\
+\textbf{Total} & 235 & 262 & 497 \\
+\hline
+\end{tabular}
+
+\vspace{0.3cm}
+\footnotesize \textit{Nota: a classe 0 corresponde ao r\'otulo de maior dificuldade operacional, definido por F1 do detector inferior a 0,97; a classe 1 corresponde ao r\'otulo de menor dificuldade, com F1 maior ou igual a 0,97. Essas classes n\~ao s\~ao categorias agron\^omicas. Os totais da matriz s\~ao somas dos valores historicamente registrados.}
+\end{table}
+
+A distribui\c{c}\~ao de classes da matriz (215 e 282 imagens) coincide com a do teste do diret\'orio dataset, constru\'ido com limiar de 0,97. Os pesos preservados permitiriam reexecutar essa avalia\c{c}\~ao.
+
+Pelas raz\~oes descritas na Se\c{c}\~ao~\ref{sec:dependencia-subconjuntos-classificador}, ``Depend\^encia entre os subconjuntos do classificador'', esse valor n\~ao estima o desempenho em imagens de origem novas, e o limiar de 0,97 usado para construir os r\'otulos n\~ao \'e uma medida de desempenho do classificador nem um ponto de corte validado para selecionar imagens de treinamento.
+
+\section{Associa\c{c}\~ao de identidades entre imagens}
+\label{sec:resultado-associacao-identidades}
+
+O procedimento de numera\c{c}\~ao foi aplicado ao campo P11, com uma refer\^encia de 217 objetos identificados e 23 arquivos-alvo. H\'a 24 arquivos de sa\'ida porque um deles \'e a c\'opia da pr\'opria refer\^encia.
+
+No conjunto dos 23 alvos processados, foram contadas 5.168 linhas de objetos, das quais 4.691 receberam identificador diferente de -1 e 477 permaneceram com esse valor sentinela, o que corresponde a 90,77\% de atribui\c{c}\~ao.
+
+\begin{table}[htb]
+\centering
+\caption{Distribui\c{c}\~ao das atribui\c{c}\~oes nos arquivos-alvo}
+\label{tab:distribuicao-atribuicoes}
+\small
+\begin{tabular}{p{3.2cm}p{1.6cm}p{2.8cm}p{3.2cm}p{3.2cm}}
+\hline
+\textbf{Grupo} & \textbf{Arquivos} & \textbf{Objetos por arquivo} & \textbf{Identificadores atribu\'idos por arquivo} & \textbf{Objetos sem identificador por arquivo} \\
+\hline
+Alvos sem sentinela & 13 & 168 a 217 & igual \`a quantidade de objetos & 0 \\
+Exce\c{c}\~ao & 1 & 217 & 216 & 1 \\
+Exce\c{c}\~ao & 1 & 218 & 217 & 1 \\
+Alvos maiores & 8 & 275 a 278 & 217 & 58 a 61 \\
+\hline
+\end{tabular}
+\end{table}
+
+Nos oito arquivos com 275 a 278 objetos, foram atribu\'idos 217 identificadores, e o n\'umero de objetos sem par coincide com o excedente sobre a refer\^encia. Essa rela\c{c}\~ao \'e compat\'ivel com o limite da associa\c{c}\~ao um-a-um: com uma refer\^encia de 217 registros, um alvo com mais objetos ter\'a necessariamente pelo menos essa diferen\c{c}a sem correspond\^encia. As contagens, contudo, n\~ao determinam onde est\~ao os objetos rejeitados nem demonstram que os pares aceitos estejam corretos.
+
+Essas contagens medem a completude das atribui\c{c}\~oes, e n\~ao a acur\'acia de identidade: verificar se cada identificador corresponde \`a parcela correta exigiria uma identifica\c{c}\~ao independente das parcelas em cada imagem.
+
+Aplicam-se aqui as distin\c{c}\~oes estabelecidas na Se\c{c}\~ao~\ref{sec:informacao-visual-incompleta}: um identificador atribu\'ido n\~ao equivale a um identificador correto, e nenhum dos dois autoriza afirma\c{c}\~oes sobre posi\c{c}\~oes experimentais ausentes ou sobre parcelas mortas.
+
+Os 23 alvos s\~ao capturas de tela de ortomosaicos do campo P11, todas registradas em 16 de mar\c{c}o de 2026; a data de captura n\~ao indica quantos voos ou datas de aquisi\c{c}\~ao est\~ao representados. N\~ao h\'a evid\^encia de valida\c{c}\~ao em outros campos nem de robustez a varia\c{c}\~oes de orienta\c{c}\~ao.
+
+\section{Rela\c{c}\~ao com a literatura}
+\label{sec:relacao-literatura}
+
+As formula\c{c}\~oes revisadas nos cap\'itulos anteriores tratam o problema de identifica\c{c}\~ao de parcelas por mecanismos distintos do adotado aqui, o que delimita o alcance da compara\c{c}\~ao. Nas abordagens que partem da estrutura do campo, detec\c{c}\~ao de bordas \citep{robb2020}, grade inicial associada ao delineamento \citep{khan2019}, layout conhecido com otimiza\c{c}\~ao hier\'arquica \citep{mardanisamani2021} e acoplamento entre rede convolucional e processamento geom\'etrico \citep{han2024}, a organiza\c{c}\~ao espacial participa da pr\'opria localiza\c{c}\~ao. No procedimento deste projeto, a associa\c{c}\~ao \`a estrutura ocorre depois da detec\c{c}\~ao e depende de uma refer\^encia numerada constru\'ida pelo operador: o objetivo \'e pr\'oximo, o mecanismo n\~ao.
+
+Quanto \`a representa\c{c}\~ao geom\'etrica, a op\c{c}\~ao por caixas orientadas segue a mesma motiva\c{c}\~ao de \citet{ding2019} para imagens a\'ereas e de \citet{zhang2025} para parcelas rotacionadas em imagens de VANT. A linha paralela de localiza\c{c}\~ao por mapas de confian\c{c}a deriva de \citet{arruda2022}, com as diferen\c{c}as de implementa\c{c}\~ao registradas na Metodologia.
+
+Quanto \`a composi\c{c}\~ao do conjunto de treinamento, os trabalhos discutidos na Se\c{c}\~ao~\ref{sec:generalizacao-dependencia} sustentam a decis\~ao de tratar a sele\c{c}\~ao das imagens como vari\'avel experimental, e o crit\'erio proposto adapta o escore de \citet{yagi2025} a uma estimativa fora da amostra. Eles n\~ao sustentam, por\'em, que excluir exemplos dif\'iceis seja necessariamente superior.
+
+Como as tarefas, os conjuntos de dados e os protocolos de avalia\c{c}\~ao n\~ao s\~ao equivalentes, os valores obtidos neste trabalho n\~ao s\~ao confrontados numericamente com os publicados por esses estudos.
+
+\section{Discuss\~ao integrada}
+\label{sec:discussao-integrada}
+
+A avalia\c{c}\~ao comparativa \'e a principal evid\^encia quantitativa deste cap\'itulo. Os checkpoints de caixas orientadas t\^em os maiores valores de mAP@0,5:0,95, e 260525\_2231 tem o maior F1 global (0,941) no ponto operacional considerado, com F1 de 0,949 nas imagens orbitais e de 0,939 nas de drone. Isso n\~ao implica superioridade em todas as medidas: o maior IoU ponderado por correspond\^encias \'e de 260512\_1741, de caixas horizontais. Os resultados n\~ao isolam o efeito de cada mudan\c{c}a nem demonstram generaliza\c{c}\~ao para outros conjuntos.
+
+A associa\c{c}\~ao de identidades acrescenta um resultado de natureza diferente: o procedimento foi executado em 23 imagens de um campo e atribuiu identificador a 90,77\% dos objetos.
+
+Quanto \`a generaliza\c{c}\~ao, o teste tem 27 imagens e cont\'em \'areas tamb\'em representadas no treinamento e na valida\c{c}\~ao do conjunto de 277 imagens, e os dados de treinamento de parte dos checkpoints, incluindo 260525\_2231, n\~ao puderam ser reconstitu\'idos. Os valores caracterizam o desempenho nessa parti\c{c}\~ao e n\~ao sustentam infer\^encia sobre campos ou regi\~oes n\~ao representados.
+
+Quanto ao efeito isolado das mudan\c{c}as, os elementos comuns da bateria tornam os resultados compar\'aveis de forma descritiva, mas n\~ao estabelecem identidade integral das condi\c{c}\~oes que produziram todas as medidas, nem uniformidade das condi\c{c}\~oes de treinamento. Nem a superioridade da representa\c{c}\~ao orientada, nem o efeito da subdivis\~ao de imagens densas, nem o ganho atribu\'ivel a qualquer gera\c{c}\~ao da arquitetura foi estabelecido por compara\c{c}\~ao controlada, e n\~ao foram recuperados resultados de execu\c{c}\~oes repetidas que permitissem estimar variabilidade.
+
+Quanto \`a preserva\c{c}\~ao de identidade, o procedimento foi aplicado e sua completude pode ser medida nas sa\'idas, mas n\~ao h\'a medida independente da corre\c{c}\~ao dos identificadores. Como encaminhamento aplicado, pretende-se que, ao final do desenvolvimento, a estrat\'egia de caracteriza\c{c}\~ao e sele\c{c}\~ao das imagens possa apoiar a Embrapa Gado de Corte na organiza\c{c}\~ao dos conjuntos empregados nas avalia\c{c}\~oes, distinguindo imagens de maior e menor contribui\c{c}\~ao para o treinamento do detector. Esse uso \'e apresentado como finalidade futura e n\~ao como resultado j\'a conclu\'ido nesta qualifica\c{c}\~ao.
